@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { history } from './redux/helpers';
+import { alertActions } from './redux/actions';
+import { PrivateRoute } from './Components/RedirectLogin';
+import { HomePage } from './Pages/HomePage';
+import { LoginPage } from './Pages/LoginPage';
+import { RegisterPage } from './Pages/RegisterPage';
+
+const App = () => {
+    const alert = useSelector(state => state.alert);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        history.listen((location, action) => {
+            // alerta claro sobre mudança de local
+            dispatch(alertActions.clear());
+        });
+    }, []);
+
+    return (
+        <div className="jumbotron">
+            <div className="container">
+                <div className="col-md-8 offset-md-2">
+                    {alert.message &&
+                        <div className={`alert ${alert.type}`}>{alert.message}</div>
+                    }
+                    <Router history={history}>
+                        <Switch>
+                            <PrivateRoute exact path="/" component={HomePage} />
+                            <Route path="/login" component={LoginPage} />
+                            <Route path="/register" component={RegisterPage} />
+                            <Redirect from="*" to="/" />
+                        </Switch>
+                    </Router>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;
