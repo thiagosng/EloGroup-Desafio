@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useHistory } from "react-router-dom";
 import uuid from "uuid/v4";
 
 const itemsFromBackend = [
@@ -74,8 +75,39 @@ const onDragEnd = (result, columns, setColumns) => {
 
 function PainelPage() {
   const [columns, setColumns] = useState(columnsFromBackend);
-  return (
+  const [leads, setLeads] = useState([]);
+  const history = useHistory();
+
+
+  const newLead = () => {
+    history.push('/new-lead');
+  };
+  
+
+  useEffect(()=> {
+    setLeads(JSON.parse(localStorage.getItem('lead')))
+    setColumns(
+      [
+        {
+          name: "Cliente em Potencial",
+          items: JSON.parse(localStorage.getItem('lead'))
+        },
+        {
+          name: "Dados Confirmados",
+          items: []
+        },
+        {
+          name: "Reunião Agendada",
+          items: []
+        }
+      ]
+    )
+    localStorage.setItem('columns', columns)
+  }, [])
+
+  return leads ? (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+      <button onClick={(e)=> newLead(e)}>New Lead</button>
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
@@ -131,7 +163,7 @@ function PainelPage() {
                                       ...provided.draggableProps.style
                                     }}
                                   >
-                                    {item.content}
+                                    {item.name}
                                   </div>
                                 );
                               }}
@@ -149,7 +181,12 @@ function PainelPage() {
         })}
       </DragDropContext>
     </div>
-  );
+  ): (
+    <div>
+      <h1>Carregando...</h1>
+    </div>
+  )
+  ;
 }
 
 export { PainelPage };

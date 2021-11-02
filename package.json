@@ -3,12 +3,14 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "antd": "^4.16.13",
         "history": "^4.10.1",
         "react": "^16.13.0",
         "react-beautiful-dnd": "^13.1.0",
         "react-dom": "^16.13.0",
         "react-redux": "^7.2.0",
         "react-router-dom": "^5.1.2",
+        "react-toastify": "^8.0.3",
         "redux": "^4.0.5",
         "redux-logger": "^4.0.0",
         "redux-thunk": "^2.3.0"
@@ -18,10 +20,11 @@
         "start": "webpack-dev-server --open"
     },
     "devDependencies": {
-        "@babel/core": "^7.4.3",
-        "@babel/preset-env": "^7.15.8",
+        "@babel/core": "^7.16.0",
+        "@babel/preset-env": "^7.16.0",
         "@babel/preset-react": "^7.0.0",
-        "babel-loader": "^8.0.5",
+        "babel-loader": "^8.2.3",
+        "css-loader": "^6.5.0",
         "html-webpack-plugin": "^3.2.0",
         "path": "^0.12.7",
         "webpack": "^4.29.6",
