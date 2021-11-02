@@ -9,7 +9,8 @@ function RegisterPage() {
         firstName: '',
         lastName: '',
         username: '',
-        password: ''
+        password: '',
+        confirmPassword: '',
     });
     const [submitted, setSubmitted] = useState(false);
     const registering = useSelector(state => state.registration.registering);
@@ -29,8 +30,12 @@ function RegisterPage() {
         e.preventDefault();
 
         setSubmitted(true);
-        if (user.firstName && user.lastName && user.username && user.password) {
-            dispatch(userActions.register(user));
+        if (user.firstName && user.lastName && user.username && user.password && user.confirmPassword) {
+            if(user.password === user.confirmPassword) {
+                dispatch(userActions.register(user));
+            } else {
+                alert('Senhas não conferem');
+            }
         }
     }
 
@@ -54,15 +59,26 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>Usuário</label>
-                    <input type="text" name="username" value={user.username} onChange={handleChange} className={'form-control' + (submitted && !user.username ? ' is-invalid' : '')} />
+                    <input type="text" name="username" value={user.username} onChange={handleChange}  required="required" className={'form-control' + (submitted && !user.username ? ' is-invalid' : '')} />
                     {submitted && !user.username &&
                         <div className="invalid-feedback">Nome do usuário é requerido</div>
                     }
                 </div>
                 <div className="form-group">
                     <label>Senha</label>
-                    <input type="password" name="password" value={user.password} onChange={handleChange} className={'form-control' + (submitted && !user.password ? ' is-invalid' : '')} />
+                    <input type="password" name="password" value={user.password} onChange={handleChange} className={'form-control' + (submitted && !user.password ? ' is-invalid' : '')}
+                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@+#$])[a-zA-Z0-9@+#$]{8,50}$" title="Password deve possuir ao menos 8 caracteres, contendo ao menos, um caracter especial(@+#$), um caracter numérico, um caracter alfanumérico;" 
+                    required="required" minlength="8" />
                     {submitted && !user.password &&
+                        <div className="invalid-feedback">Senha é requerido</div>
+                    }
+                </div>
+                <div className="form-group">
+                    <label>Confirmar senha</label>
+                    <input type="password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} className={'form-control' + (submitted && !user.confirmPassword ? ' is-invalid' : '')} 
+                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@+#$])[a-zA-Z0-9@+#$]{8,50}$" title="Password deve possuir ao menos 8 caracteres, contendo ao menos, um caracter especial(@+#$), um caracter numérico, um caracter alfanumérico;" 
+                    required="required" minlength="8"/>
+                    {submitted && !user.confirmPassword &&
                         <div className="invalid-feedback">Senha é requerido</div>
                     }
                 </div>
