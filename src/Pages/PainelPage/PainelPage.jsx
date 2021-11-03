@@ -107,7 +107,7 @@ function PainelPage() {
 
   return leads ? (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
-      <button onClick={(e)=> newLead(e)}>New Lead</button>
+      <div className="col-md-3"><button className="btn btn-primary btn-block" onClick={(e)=> newLead(e)}>Novo Lead (+)</button></div>
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
@@ -183,7 +183,10 @@ function PainelPage() {
     </div>
   ): (
     <div>
-      <h1>Carregando...</h1>
+      <h1>Nenhum lead cadastrado...</h1>
+      <span>
+        <button onClick={(e)=> newLead(e)}>Criar novo Lead</button>
+      </span>
     </div>
   )
   ;
