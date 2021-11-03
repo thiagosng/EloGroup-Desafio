@@ -116,7 +116,7 @@ const NewLeadPage = () => {
                         </tr>
                         </div>
                         </ table>
-                        <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                        <button type="submit" className="btn btn-primary btn-block">Criar novo lead</button>
                         </div>
                     </form>
                 </div>
