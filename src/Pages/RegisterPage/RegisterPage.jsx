@@ -28,7 +28,7 @@ function RegisterPage() {
         e.preventDefault();
 
         setSubmitted(true);
-        if (user.firstName && user.lastName && user.username && user.password && user.confirmPassword) {
+        if (user.username && user.password && user.confirmPassword) {
             if(user.password === user.confirmPassword) {
                 dispatch(userActions.register(user));
             } else {
