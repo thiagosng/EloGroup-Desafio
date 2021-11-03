@@ -6,8 +6,6 @@ import { userActions } from '../../redux/actions';
 
 function RegisterPage() {
     const [user, setUser] = useState({
-        firstName: '',
-        lastName: '',
         username: '',
         password: '',
         confirmPassword: '',
@@ -41,22 +39,8 @@ function RegisterPage() {
 
     return (
         <div className="col-lg-8 offset-lg-2">
-            <h2>Registrar</h2>
+            <img src="https://elogroup.com.br/wp-content/uploads/2021/08/Logo-2.svg" alt="logo" />
             <form name="form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Primeiro Nome</label>
-                    <input type="text" name="firstName" value={user.firstName} onChange={handleChange} className={'form-control' + (submitted && !user.firstName ? ' is-invalid' : '')} />
-                    {submitted && !user.firstName &&
-                        <div className="invalid-feedback">Primeiro nome é requerido</div>
-                    }
-                </div>
-                <div className="form-group">
-                    <label>Ultimo Nome</label>
-                    <input type="text" name="lastName" value={user.lastName} onChange={handleChange} className={'form-control' + (submitted && !user.lastName ? ' is-invalid' : '')} />
-                    {submitted && !user.lastName &&
-                        <div className="invalid-feedback">Ultimo nome é requerido</div>
-                    }
-                </div>
                 <div className="form-group">
                     <label>Usuário</label>
                     <input type="text" name="username" value={user.username} onChange={handleChange}  required="required" className={'form-control' + (submitted && !user.username ? ' is-invalid' : '')} />

@@ -37,9 +37,7 @@ function LoginPage() {
 
     return (
         <div className="col-lg-8 offset-lg-2">
-            
-                <img src="https://elogroup.com.br/wp-content/uploads/2021/08/Logo-2.svg" alt="logo" />
-       
+            <img src="https://elogroup.com.br/wp-content/uploads/2021/08/Logo-2.svg" alt="logo" />
             <form name="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Usuário</label>

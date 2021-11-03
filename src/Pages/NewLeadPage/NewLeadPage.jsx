@@ -22,6 +22,7 @@ const NewLeadPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name, email, phone);
+        alert('Lead registrado com sucesso');
         const oldLeads = localStorage.getItem('lead')
         if(oldLeads === null) {
            localStorage.setItem('lead', JSON.stringify([{ id: uuid(), name, email, phone,  rpa, produtoDigital, analytics, bpm }]));

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { history } from './redux/helpers';
 import { alertActions } from './redux/actions';
 import { PrivateRoute } from './Components/RedirectLogin';
-import { HomePage } from './Pages/HomePage';
 import { LoginPage } from './Pages/LoginPage';
 import { RegisterPage } from './Pages/RegisterPage';
 import { PainelPage } from './Pages/PainelPage';
@@ -30,7 +29,6 @@ const App = () => {
                     }
                     <Router history={history}>
                         <Switch>
-                            {/* <PrivateRoute exact path="/" component={HomePage} /> */}
                             <Route path="/login" component={LoginPage} />
                             <Route path="/register" component={RegisterPage} />
                             <PrivateRoute exact path="/" component={PainelPage} />
